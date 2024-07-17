@@ -42,7 +42,7 @@ async def getBy_ID(customer_id:str):
 
 # Route to add a new person
 @app.post('/add_customer', response_model=PersonOut, status_code=status.HTTP_200_OK)
-def addPerson(person:PersonOut):
+async def addPerson(person:PersonOut):
     newCustomer = models.Person(
         customer_id = person.customer_id,
         customer_name = person.customer_name,
@@ -63,7 +63,7 @@ def addPerson(person:PersonOut):
 
 # Route to update a customer by ID
 @app.put('/update_customer/{customer_id}', response_model=PersonOut, status_code=status.HTTP_202_ACCEPTED)
-def updatePerson(customer_id:str, person:PersonOut):
+async def updatePerson(customer_id:str, person:PersonOut):
     find_customer  = db.query(models.Person).filter(models.Person.customer_id == customer_id).first()
     if find_customer is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Person with this ID does not exists")
@@ -81,7 +81,7 @@ def updatePerson(customer_id:str, person:PersonOut):
     
 # Route to delete a person by ID
 @app.delete('/delete_person/{customer_id}', response_model=PersonOut, status_code=200)
-def deletePerson(customer_id:str):
+async def deletePerson(customer_id:str):
     find_person = db.query(models.Person).filter(models.Person.customer_id == customer_id).first()
 
     if find_person is not None:
