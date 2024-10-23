@@ -2,8 +2,6 @@ CRUD Operations in Python using FastAPI and working on an existing table in the 
 <br>
 ### Project Structure
 <br>
-your-project/
-<br>
 ├── main.py # FastAPI application
 <br>
 ├── database.py # Database connection setup
